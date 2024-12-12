@@ -8,6 +8,7 @@ import Alpha from './Alpha.vue';
 import Preview from './Preview.vue';
 import Box from './Box.vue';
 import EyeDropper from './EyeDropper.vue';
+import Colors from './Colors.vue';
 import { ref, reactive, computed, watch, nextTick } from '#imports';
 
 type Props = {
@@ -96,6 +97,15 @@ function selectEyeDropper(color: string) {
   inputHex(color);
   nextTick(() => isPreventSelects.value = false);
 }
+function selectColor(color: string) {
+  isPreventSelects.value = true;
+  const { r, g, b, a, h, s, v } = any2rgbahsv(color);
+  console.log(a);
+  Object.assign(fullColorSpector, { r, g, b, a, h, s, v });
+  Object.assign(hueColor, rgb2rgbHue({ r, g, b }));
+  setText();
+  nextTick(() => isPreventSelects.value = false);
+}
 
 function inputHex(color: string) {
   const { r, g, b, a, h, s, v } = any2rgbahsv(color);
@@ -161,33 +171,28 @@ function inputRgba(color: string) {
         @input-color="inputRgba"
         @input-focus="handleInputFocus"
       />
+      <Colors
+        class="color-picker__rows__colors"
+        :color="hexString"
+        :colors-default="[
+          '#FFB243',
+          '#FFE623',
+          '#6EFF2A',
+          '#1BC7B1',
+          '#00BEFF',
+          '#2E81FF',
+          '#BF3DCE',
+          '#8E00A7',
+          '#00000000',
+        ]"
+        @select="selectColor"
+      />
     </div>
   </div>
 </template>
 
 <style lang="scss">
-.color-picker, .color-picker * {
-  font-family: 'Roboto', sans-serif;
-  box-sizing: border-box;
-  vertical-align: bottom;
-}
 
-.color-picker--box-border {
-  position: relative;
-  border-radius: 2px;
-  overflow: hidden;
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    box-shadow: 0 0 1px 0.5px rgba(0, 0, 0, 0.2) inset;
-    pointer-events: none;
-  }
-}
 </style>
 
 <style lang="scss" scoped>
@@ -211,9 +216,10 @@ function inputRgba(color: string) {
     grid-template-areas:
       "PREVIEW PREVIEW"
       "HEX HEX"
-      "RGBA RGBA";
+      "RGBA RGBA"
+      "COLORS COLORS";
     grid-template-columns: auto 30px;
-    grid-template-rows: 30px auto auto;
+    grid-template-rows: 30px repeat(3, auto);
     gap: 8px;
 
     &__preview {
@@ -225,12 +231,16 @@ function inputRgba(color: string) {
     &__rgba {
       grid-area: RGBA;
     }
+    &__colors {
+      grid-area: COLORS;
+    }
 
     &--with-eye-dropper {
       grid-template-areas:
         "PREVIEW EYEDROPPER"
         "HEX HEX"
-        "RGBA RGBA";
+        "RGBA RGBA"
+        "COLORS COLORS";
       grid-template-columns: auto 38px;
       grid-template-rows: 38px auto auto;
     }

@@ -24,6 +24,7 @@ const isY = ['xy', 'y'].includes(props.mode);
 const isDrag = ref(false);
 const containerRef = ref<HTMLDivElement>();
 const containerCanvasRef = ref<HTMLCanvasElement>();
+const canvasCtx = ref<CanvasRenderingContext2D>();
 const sliderPosition = reactive<ModuleStylesXY>({ x: 0, y: 0 });
 const sliderStyles = computed<ModuleStylesPos>(() => ({ left: `${sliderPosition.x}px`, top: `${sliderPosition.y}px` }));
 const width = computed(() => containerRef.value?.clientWidth ?? 0);
@@ -31,7 +32,7 @@ const height = computed(() => containerRef.value?.clientHeight ?? 0);
 
 function renderBg() {
   const canvas = containerCanvasRef.value!;
-  const ctx = canvas.getContext('2d')!;
+  const ctx = getCanvasCtx();
   canvas.width = width.value;
   canvas.height = height.value;
 
@@ -85,8 +86,13 @@ function commitSelect() {
   emit('select', props.selectGenerator(ctx, width.value, height.value, sliderPosition));
 }
 function getCanvasCtx() {
+  if (canvasCtx.value) return canvasCtx.value;
+
   const canvas = containerCanvasRef.value!;
-  return canvas.getContext('2d')!;
+  canvasCtx.value = canvas.getContext('2d', {
+    willReadFrequently: true
+  })!;
+  return canvasCtx.value;
 }
 function blur() {
   if (document.activeElement) {

@@ -1,0 +1,24 @@
+.color-picker, .color-picker * {
+  font-family: 'Roboto', sans-serif;
+  box-sizing: border-box;
+  vertical-align: bottom;
+  padding: 0;
+  margin: 0;
+}
+
+.color-picker--box-border {
+  position: relative;
+  border-radius: 2px;
+  overflow: hidden;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    box-shadow: 0 0 1px 0.5px rgba(0, 0, 0, 0.2) inset;
+    pointer-events: none;
+  }
+}
