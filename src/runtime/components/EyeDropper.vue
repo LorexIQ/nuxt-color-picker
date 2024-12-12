@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Pipette from '../icons/Pipette.vue';
 import Loader from '../icons/Loader.vue';
+import { ref } from '#imports';
 
 type Emits = {
   (e: 'select', v: string): void;
@@ -23,18 +24,18 @@ async function openDropper() {
 </script>
 
 <template>
-  <div class="color-picker-eye-dropper">
+  <div class="CP-eye-dropper">
     <Loader v-if="isDropperOpen" />
     <Pipette
       v-else
-      class="color-picker-eye-dropper__pipette"
+      class="CP-eye-dropper__pipette"
       @click="openDropper"
     />
   </div>
 </template>
 
 <style scoped lang="scss">
-.color-picker-eye-dropper {
+.CP-eye-dropper {
   width: 38px;
   border-radius: 2px;
   color: #9099a4;

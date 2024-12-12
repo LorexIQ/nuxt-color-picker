@@ -1,3 +1,6 @@
+import type { Component } from 'vue';
+import type { Sandbox } from '../classes/Sandbox';
+
 export type ModuleStylesX = {
   x: number;
 };
@@ -36,3 +39,16 @@ export type ModuleColorMultiType = {
   hsv: ModuleHSV;
   hex: ModuleHEX;
 };
+
+export type ModuleSandboxSize = {
+  width: number;
+  height: number;
+};
+export type ModuleSandboxComponent = {
+  id: string;
+  component: Component;
+  props?: { [name: string]: any };
+  emits?: { [name: string]: (e: any) => any };
+};
+
+export type ModuleSandbox = Sandbox;

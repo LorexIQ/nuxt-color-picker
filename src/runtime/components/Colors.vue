@@ -54,15 +54,15 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="color-picker-colors">
+  <div class="CP-colors">
     <div
-      class="color-picker-colors__items"
+      class="CP-colors__items"
       :style="{ '--alpha': imgAlphaBase64 }"
     >
       <div
         v-for="item in colorsHistory"
         :key="item"
-        class="color-picker-colors__items__item color-picker--box-border"
+        class="CP-colors__items__item CP--box-border"
         :style="{ '--color': item }"
         @click="select(item)"
       />
@@ -71,7 +71,7 @@ onUnmounted(() => {
 </template>
 
 <style lang="scss" scoped>
-.color-picker-colors {
+.CP-colors {
   width: 100%;
   overflow: hidden;
 

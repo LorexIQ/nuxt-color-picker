@@ -44,7 +44,7 @@ export function hex2rgba(hex: ModuleHEX): ModuleRGBA {
 
   hex = hex.slice(1);
   let a = change(hex.slice(6, 8));
-  a = isNaN(a) ? 1 : a;
+  a = isNaN(a) ? 1 : a / 255;
 
   return {
     r: change(hex.slice(0, 2)) || 0,

@@ -1,4 +1,4 @@
-import { defineNuxtModule, createResolver, addComponent } from '@nuxt/kit';
+import { defineNuxtModule, createResolver, addComponent, addPlugin } from '@nuxt/kit';
 
 export default defineNuxtModule({
   meta: {
@@ -8,6 +8,8 @@ export default defineNuxtModule({
     const resolver = createResolver(import.meta.url);
 
     _nuxt.options.css.push(resolver.resolve('runtime', 'assets', 'main.scss'));
+
+    addPlugin(resolver.resolve('./runtime/plugin'));
 
     await addComponent({
       name: 'ColorPicker',

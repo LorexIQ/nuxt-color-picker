@@ -24,15 +24,15 @@ function handleFocus(status: boolean) {
 </script>
 
 <template>
-  <div class="color-picker-box color-picker--box-border">
-    <span class="color-picker-box__name">
+  <div class="CP-box CP--box-border">
+    <span class="CP-box__name">
       {{ name }}
     </span>
     <input
       :id="name"
       v-model="modelColor"
       type="text"
-      class="color-picker-box__value"
+      class="CP-box__value"
       @focusin="handleFocus(true)"
       @focusout="handleFocus(false)"
     >
@@ -40,7 +40,7 @@ function handleFocus(status: boolean) {
 </template>
 
 <style lang="scss">
-.color-picker-box {
+.CP-box {
   display: flex;
   font-size: 12px;
 

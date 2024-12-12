@@ -42,7 +42,7 @@ onMounted(() => {
 <template>
   <div
     ref="containerRef"
-    class="color-picker-preview color-picker--box-border"
+    class="CP-preview CP--box-border"
   >
     <canvas ref="containerCanvasRef" />
   </div>

@@ -1,4 +1,7 @@
-.color-picker, .color-picker * {
+.CP-sandbox,
+.CP-sandbox *,
+.CP-block,
+.CP-block * {
   font-family: 'Roboto', sans-serif;
   box-sizing: border-box;
   vertical-align: bottom;
@@ -6,7 +9,7 @@
   margin: 0;
 }
 
-.color-picker--box-border {
+.CP--box-border {
   position: relative;
   border-radius: 2px;
   overflow: hidden;

@@ -116,11 +116,11 @@ defineExpose({
 <template>
   <div
     ref="containerRef"
-    class="canvas-picker"
-    :class="`canvas-picker--${mode}`"
+    class="CP-canvas-picker"
+    :class="`CP-canvas-picker--${mode}`"
     @mousedown.prevent.stop="select"
   >
-    <div class="canvas-picker__canvas color-picker--box-border">
+    <div class="CP-canvas-picker__canvas CP--box-border">
       <canvas ref="containerCanvasRef" />
     </div>
     <div
@@ -128,14 +128,14 @@ defineExpose({
         ...sliderStyles,
         backgroundColor: sliderBg,
       }"
-      class="canvas-picker__slider"
+      class="CP-canvas-picker__slider"
       @mousedown.prevent.stop="select"
     />
   </div>
 </template>
 
 <style lang="scss" scoped>
-.canvas-picker {
+.CP-canvas-picker {
   position: relative;
   width: 100%;
   height: 100%;
@@ -147,7 +147,7 @@ defineExpose({
     box-sizing: border-box;
   }
 
-  &--xy .canvas-picker__slider {
+  &--xy .CP-canvas-picker__slider {
     left: 100px;
     top: 0;
     width: 10px;
@@ -156,7 +156,7 @@ defineExpose({
     border: 1px solid #fff;
     box-shadow: 0 0 2px 0.5px rgba(0, 0, 0, 0.2) inset, 0 0 1px 1px rgba(0, 0, 0, 0.3);
   }
-  &--x .canvas-picker__slider {
+  &--x .CP-canvas-picker__slider {
     left: 100px;
     top: 0;
     width: 4px;
@@ -164,7 +164,7 @@ defineExpose({
     border-radius: 2px;
     background: #fff;
   }
-  &--y .canvas-picker__slider {
+  &--y .CP-canvas-picker__slider {
     left: 0;
     top: 100px;
     width: 100%;
