@@ -51,8 +51,8 @@ function handleFocus(status: boolean) {
     float: left;
     width: 60px;
     height: 30px;
-    color: var(--color-picker-input-title);
-    background: var(--color-picker-input-title-bg);
+    color: var(--colorPickerInputTitle);
+    background: var(--colorPickerInputTitleBg);
     user-select: none;
   }
   &__value {
@@ -61,8 +61,8 @@ function handleFocus(status: boolean) {
     height: 30px;
     padding: 0 12px;
     border: 0;
-    color: var(--color-picker-input-text);
-    background: var(--color-picker-input-text-bg);
+    color: var(--colorPickerInputText);
+    background: var(--colorPickerInputTextBg);
     cursor: text;
 
     &:focus {

@@ -227,9 +227,9 @@ defineExpose({
   gap: 8px;
   width: 218px;
   padding: 10px;
-  background: var(--color-picker-bg);
+  background: var(--colorPickerBg);
   border-radius: 5px;
-  box-shadow: 0 0 16px 0 var(--color-picker-shadow);
+  box-shadow: 0 0 16px 0 var(--colorPickerShadow);
 
   &__pickers {
     display: grid;

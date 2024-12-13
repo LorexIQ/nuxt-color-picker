@@ -38,9 +38,9 @@ async function openDropper() {
 .CP-eye-dropper {
   width: 38px;
   border-radius: 2px;
-  color: var(--color-picker-dropper);
-  background: var(--color-picker-dropper-bg);
-  box-shadow:  0 0 1px 0.5px var(--color-picker-shadow) inset;
+  color: var(--colorPickerDropper);
+  background: var(--colorPickerDropperBg);
+  box-shadow:  0 0 1px 0.5px var(--colorPickerShadow) inset;
   cursor: pointer;
   transition: .3s;
   overflow: hidden;

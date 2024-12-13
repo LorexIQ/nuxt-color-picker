@@ -143,7 +143,7 @@ defineExpose({
 
   &__slider {
     position: absolute;
-    box-shadow: 0 0 1px 1px var(--color-picker-shadow);
+    box-shadow: 0 0 1px 1px var(--colorPickerShadow);
     box-sizing: border-box;
   }
 
@@ -153,8 +153,8 @@ defineExpose({
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    border: 1px solid var(--color-picker-slider);
-    box-shadow: 0 0 2px 0.5px var(--color-picker-shadow) inset, 0 0 1px 1px var(--color-picker-shadow);
+    border: 1px solid var(--colorPickerSlider);
+    box-shadow: 0 0 2px 0.5px var(--colorPickerShadow) inset, 0 0 1px 1px var(--colorPickerShadow);
   }
   &--x .CP-canvas-picker__slider {
     left: 100px;
@@ -162,7 +162,7 @@ defineExpose({
     width: 4px;
     height: 100%;
     border-radius: 2px;
-    background: var(--color-picker-slider);
+    background: var(--colorPickerSlider);
   }
   &--y .CP-canvas-picker__slider {
     left: 0;
@@ -170,7 +170,7 @@ defineExpose({
     width: 100%;
     height: 4px;
     border-radius: 2px;
-    background: var(--color-picker-slider);
+    background: var(--colorPickerSlider);
   }
 }
 </style>

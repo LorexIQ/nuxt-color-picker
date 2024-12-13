@@ -26,14 +26,14 @@
   }
 }
 
-.CP-sandbox, .CP-block {
-  --color-picker-bg: #fff;
-  --color-picker-input-title: #999;
-  --color-picker-input-title-bg: #e7e8e9;
-  --color-picker-input-text: #666;
-  --color-picker-input-text-bg: #eceef0;
-  --color-picker-dropper: #9099a4;
-  --color-picker-dropper-bg: #eceef0;
-  --color-picker-shadow: #00000033;
-  --color-picker-slider: #fff;
+:root {
+  --colorPickerBg: #fff;
+  --colorPickerInputTitle: #999;
+  --colorPickerInputTitleBg: #e7e8e9;
+  --colorPickerInputText: #666;
+  --colorPickerInputTextBg: #eceef0;
+  --colorPickerDropper: #9099a4;
+  --colorPickerDropperBg: #eceef0;
+  --colorPickerShadow: #00000033;
+  --colorPickerSlider: #fff;
 }
