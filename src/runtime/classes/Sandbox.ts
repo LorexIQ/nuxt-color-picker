@@ -1,5 +1,11 @@
 import { h, markRaw, type Ref, render } from 'vue';
-import type { ModuleStylesXY, ModuleSandboxComponent, ModuleSandboxSize } from '../types';
+import type {
+  ModuleStylesXY,
+  ModuleSandboxComponent,
+  ModuleSandboxSize,
+  ModuleSandboxProps,
+  ModuleSandboxEmits
+} from '../types';
 import ModuleSandbox from '../components/ModuleSandbox.vue';
 import ColorPickerAbsolute from '../components/ColorPickerAbsolute.vue';
 import unwrap from '../composables/unwrap';
@@ -46,18 +52,21 @@ export class Sandbox {
     this.boxSize.height = event.height;
   }
 
-  openComponent(position: ModuleStylesXY, color: Ref<string | undefined>): void {
+  openComponent(position: ModuleStylesXY, props: ModuleSandboxProps, emits: ModuleSandboxEmits): void {
     unwrap.set(this, 'component', {
       id: 'color-picker',
       component: markRaw(ColorPickerAbsolute),
       props: {
+        ...props,
         position,
-        sandboxSize: this.boxSize,
-        modelValue: color.value
+        sandboxSize: this.boxSize
       },
       emits: {
-        'close': () => this.closeComponent(),
-        'update:modelValue': value => color.value = value
+        ...emits,
+        close: () => {
+          emits.close?.();
+          this.closeComponent();
+        }
       }
     });
   }

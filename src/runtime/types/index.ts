@@ -44,6 +44,8 @@ export type ModuleSandboxSize = {
   width: number;
   height: number;
 };
+export type ModuleSandboxProps = Record<string, any>;
+export type ModuleSandboxEmits = Record<string, ((data?: any) => any)>;
 export type ModuleSandboxComponent = {
   id: string;
   component: Component;

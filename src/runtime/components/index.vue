@@ -14,6 +14,11 @@ const emit = defineEmits<Emits>();
 const sandbox = useSandbox();
 
 const innerValue = ref(props.modelValue);
+const sharedVariables = {
+  color: innerValue,
+  hide,
+  show
+};
 
 watch(innerValue, newValue => newValue && emit('update:modelValue', newValue));
 
@@ -23,23 +28,24 @@ function show(event: MouseEvent) {
       x: event.pageX,
       y: event.pageY
     },
-    innerValue
+    {
+      modelValue: innerValue.value
+    },
+    {
+      'update:modelValue': event => innerValue.value = event
+    }
   );
 }
 function hide() {
   sandbox.value.closeComponent();
 }
+
+defineExpose(sharedVariables);
 </script>
 
 <template>
   <div class="CP">
-    <slot
-      :hide="hide"
-      :show="show"
-    />
-    <button @click="show">
-      123
-    </button>
+    <slot v-bind="sharedVariables" />
   </div>
 </template>
 

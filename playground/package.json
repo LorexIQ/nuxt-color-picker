@@ -8,6 +8,7 @@
     "generate": "nuxi generate"
   },
   "dependencies": {
+    "@nuxthub/core": "^0.8.8",
     "nuxt": "^3.14.1592"
   }
 }
