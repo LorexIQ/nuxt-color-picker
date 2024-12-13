@@ -53,7 +53,6 @@ onMounted(() => {
     @mousedown.self="regClickBridgeTime"
     @mouseup.self="verifyClickBridge"
   >
-    {{ clickBridgeTime }}
     <color-picker-block
       ref="componentRef"
       class="CP-absolute__component"

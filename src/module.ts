@@ -15,5 +15,9 @@ export default defineNuxtModule({
       name: 'ColorPicker',
       filePath: resolver.resolve('runtime', 'components', 'index.vue')
     });
+    await addComponent({
+      name: 'ColorPickerBlock',
+      filePath: resolver.resolve('runtime', 'components', 'ColorPickerBlock.vue')
+    });
   }
 });

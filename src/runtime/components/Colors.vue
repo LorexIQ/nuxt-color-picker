@@ -49,7 +49,7 @@ onMounted(() => {
   readStorage();
 });
 onUnmounted(() => {
-  // saveStorage();
+  saveStorage();
 });
 </script>
 

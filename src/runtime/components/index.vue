@@ -7,6 +7,7 @@ type Props = {
 };
 type Emits = {
   (e: 'update:modelValue', value: string): void;
+  (e: 'close'): void;
 };
 
 const props = defineProps<Props>();
@@ -32,7 +33,8 @@ function show(event: MouseEvent) {
       modelValue: innerValue.value
     },
     {
-      'update:modelValue': event => innerValue.value = event
+      'update:modelValue': event => innerValue.value = event,
+      'close': () => emit('close')
     }
   );
 }
@@ -48,7 +50,3 @@ defineExpose(sharedVariables);
     <slot v-bind="sharedVariables" />
   </div>
 </template>
-
-<style scoped lang="scss">
-
-</style>

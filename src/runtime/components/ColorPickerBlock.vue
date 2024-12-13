@@ -77,6 +77,17 @@ function setText() {
 function handleInputFocus(status: boolean) {
   isPreventSelects.value = status;
 }
+function withPreventSelects(handler: () => any) {
+  isPreventSelects.value = true;
+
+  nextTick(() => {
+    handler();
+
+    nextTick(() => {
+      isPreventSelects.value = true;
+    });
+  });
+}
 
 function initColorValue() {
   Object.assign(fullColorSpector, any2rgbahsv(props.modelValue));
@@ -101,17 +112,17 @@ function selectAlpha(a: number) {
   setText();
 }
 function selectEyeDropper(color: string) {
-  isPreventSelects.value = true;
-  inputHex(color);
-  nextTick(() => isPreventSelects.value = false);
+  withPreventSelects(() => {
+    inputHex(color);
+  });
 }
-function selectColor(color: string) {
-  isPreventSelects.value = true;
-  const { r, g, b, a, h, s, v } = any2rgbahsv(color);
-  Object.assign(fullColorSpector, { r, g, b, a, h, s, v });
-  Object.assign(hueColor, rgb2rgbHue({ r, g, b }));
-  setText();
-  nextTick(() => isPreventSelects.value = false);
+async function selectColor(color: string) {
+  withPreventSelects(() => {
+    const { r, g, b, a, h, s, v } = any2rgbahsv(color);
+    Object.assign(fullColorSpector, { r, g, b, a, h, s, v });
+    Object.assign(hueColor, rgb2rgbHue({ r, g, b }));
+    setText();
+  });
 }
 
 function inputHex(color: string) {
@@ -216,9 +227,9 @@ defineExpose({
   gap: 8px;
   width: 218px;
   padding: 10px;
-  background: #ffffff;
+  background: var(--color-picker-bg);
   border-radius: 5px;
-  box-shadow: 0 0 16px 0 rgba(0, 0, 0, 0.16);
+  box-shadow: 0 0 16px 0 var(--color-picker-shadow);
 
   &__pickers {
     display: grid;
