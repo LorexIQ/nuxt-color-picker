@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.1.2
+
+[compare changes](https://github.com/LorexIQ/nuxt-color-picker/compare/v1.1.1...v1.1.2)
+
+### 📖 Documentation
+
+- Исправлены ошибки ([8fe4f5e](https://github.com/LorexIQ/nuxt-color-picker/commit/8fe4f5e))
+
+### ❤️ Contributors
+
+- LorexIQ <i@liq-mail.ru>
+
 ## v1.1.1
 
 [compare changes](https://github.com/LorexIQ/nuxt-color-picker/compare/v1.1.0...v1.1.1)
