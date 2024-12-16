@@ -1,5 +1,4 @@
-
-[![nuxt-color-picker](https://raw.githubusercontent.com/LorexIQ/nuxt-color-picker/master/docs/poster.png)](https://raw.githubusercontent.com/LorexIQ/nuxt-color-picker/master/docs/poster.png)
+[![nuxt-color-picker](./docs/poster.png)](./docs/poster.png)
 
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
