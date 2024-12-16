@@ -43,6 +43,8 @@ export function hex2rgba(hex: ModuleHEX): ModuleRGBA {
   const change = (val: string) => parseInt(val, 16);
 
   hex = hex.slice(1);
+  if (hex.length === 3) hex = `${hex[0]}${hex[0]}${hex[1]}${hex[1]}${hex[2]}${hex[2]}`;
+
   let a = change(hex.slice(6, 8));
   a = isNaN(a) ? 1 : a / 255;
 

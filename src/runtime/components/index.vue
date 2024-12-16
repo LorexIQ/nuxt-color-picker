@@ -1,12 +1,14 @@
 <script setup lang="ts">
 import useSandbox from '../composables/useSandbox';
 import { ref, watch } from '#imports';
+import type { ModuleColorMultiType } from '~/src/runtime/types';
 
 type Props = {
   modelValue?: string;
 };
 type Emits = {
-  (e: 'update:modelValue', value: string): void;
+  (e: 'update:modelValue', v: string): void;
+  (e: 'change', v: ModuleColorMultiType): void;
   (e: 'close'): void;
 };
 
@@ -15,13 +17,14 @@ const emit = defineEmits<Emits>();
 const sandbox = useSandbox();
 
 const innerValue = ref(props.modelValue);
+
 const sharedVariables = {
   color: innerValue,
   hide,
   show
 };
 
-watch(innerValue, newValue => newValue && emit('update:modelValue', newValue));
+watch(() => props.modelValue, value => innerValue.value = value);
 
 function show(event: MouseEvent) {
   sandbox.value.openComponent(
@@ -30,10 +33,15 @@ function show(event: MouseEvent) {
       y: event.pageY
     },
     {
-      modelValue: innerValue.value
+      modelValue: props.modelValue
     },
     {
-      'update:modelValue': event => innerValue.value = event,
+      'update:modelValue': (event) => {
+        emit('update:modelValue', event);
+      },
+      'change': (event) => {
+        emit('change', event);
+      },
       'close': () => emit('close')
     }
   );

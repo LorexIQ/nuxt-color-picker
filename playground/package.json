@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "my-module-playground",
+  "name": "nuxt-color-picker-playground",
   "type": "module",
   "scripts": {
     "dev": "nuxi dev",

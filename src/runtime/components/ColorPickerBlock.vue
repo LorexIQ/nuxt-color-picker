@@ -84,7 +84,7 @@ function withPreventSelects(handler: () => any) {
     handler();
 
     nextTick(() => {
-      isPreventSelects.value = true;
+      isPreventSelects.value = false;
     });
   });
 }
@@ -226,10 +226,11 @@ defineExpose({
   flex-direction: column;
   gap: 8px;
   width: 218px;
+  height: max-content;
   padding: 10px;
   background: var(--colorPickerBg);
   border-radius: 5px;
-  box-shadow: 0 0 16px 0 var(--colorPickerShadow);
+  box-shadow: 0 0 16px 0 var(--colorPickerShadowOut);
 
   &__pickers {
     display: grid;

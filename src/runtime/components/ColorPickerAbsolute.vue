@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import type { ModuleSandboxSize, ModuleStylesXY } from '../types';
+import type { ModuleColorMultiType, ModuleSandboxSize, ModuleStylesXY } from '../types';
 import ColorPickerBlock from './ColorPickerBlock.vue';
 import { computed, onMounted, ref } from '#imports';
 
@@ -10,6 +10,7 @@ type Props = {
 };
 type Emits = {
   (e: 'update:modelValue', v: string): void;
+  (e: 'change', v: ModuleColorMultiType): void;
   (e: 'close'): void;
 };
 
@@ -59,6 +60,7 @@ onMounted(() => {
       :style="componentPosition"
       :model-value="modelValue"
       @update:model-value="emit('update:modelValue', $event)"
+      @change="emit('change', $event)"
     />
   </div>
 </template>

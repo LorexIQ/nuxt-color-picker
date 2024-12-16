@@ -31,6 +31,7 @@ const width = computed(() => containerRef.value?.clientWidth ?? 0);
 const height = computed(() => containerRef.value?.clientHeight ?? 0);
 
 function renderBg() {
+  if (!containerCanvasRef.value) return;
   const canvas = containerCanvasRef.value!;
   const ctx = getCanvasCtx();
   canvas.width = width.value;
@@ -44,7 +45,8 @@ function renderSlider() {
   if (!isUndefined(buildPosition.y)) sliderPosition.y = buildPosition.y;
 }
 function select(event: MouseEvent) {
-  const { top, left } = containerRef.value!.getBoundingClientRect();
+  if (!containerRef.value) return;
+  const { top, left } = containerRef.value.getBoundingClientRect();
 
   const mousemove = (event: MouseEvent) => {
     isDrag.value = true;
@@ -143,7 +145,7 @@ defineExpose({
 
   &__slider {
     position: absolute;
-    box-shadow: 0 0 1px 1px var(--colorPickerShadow);
+    box-shadow: 0 0 1px 1px var(--colorPickerShadowIn);
     box-sizing: border-box;
   }
 
@@ -154,7 +156,7 @@ defineExpose({
     height: 10px;
     border-radius: 50%;
     border: 1px solid var(--colorPickerSlider);
-    box-shadow: 0 0 2px 0.5px var(--colorPickerShadow) inset, 0 0 1px 1px var(--colorPickerShadow);
+    box-shadow: 0 0 2px 0.5px var(--colorPickerShadowIn) inset, 0 0 1px 1px var(--colorPickerShadowIn);
   }
   &--x .CP-canvas-picker__slider {
     left: 100px;

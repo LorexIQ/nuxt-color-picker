@@ -24,7 +24,7 @@ async function openDropper() {
 </script>
 
 <template>
-  <div class="CP-eye-dropper">
+  <div class="CP-eye-dropper CP--box-border">
     <Loader v-if="isDropperOpen" />
     <Pipette
       v-else
@@ -37,12 +37,8 @@ async function openDropper() {
 <style scoped lang="scss">
 .CP-eye-dropper {
   width: 38px;
-  border-radius: 2px;
   color: var(--colorPickerDropper);
   background: var(--colorPickerDropperBg);
-  box-shadow:  0 0 1px 0.5px var(--colorPickerShadow) inset;
   cursor: pointer;
-  transition: .3s;
-  overflow: hidden;
 }
 </style>
