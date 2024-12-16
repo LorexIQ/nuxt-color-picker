@@ -12,9 +12,9 @@ A module that adds a convenient, customizable ColorPicker component to select co
 
 > This module works with Nuxt 3 only
 
-<div style="text-align: center;">
+<p>
   <a style="font-size: 24px;" href="https://nuxt-color-picker.nuxt.dev/">DEMO</a>
-</div>
+</p>
 
 ## Features
 
@@ -25,7 +25,7 @@ A module that adds a convenient, customizable ColorPicker component to select co
 - Color selection history
 - Initial color display
 - Alpha range availability
-- 
+
 ## Usage
 
 Install the module:
@@ -86,6 +86,8 @@ type Slot = {
 ```
 
 * ### ColorPickerBlock
+
+The component is the main block of the Color Picker. It is always open and can be integrated as a block, anywhere in the application.
 
 ```ts
 // Configuration types
