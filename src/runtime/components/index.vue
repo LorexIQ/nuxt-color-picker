@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import type { Ref } from 'vue';
 import useSandbox from '../composables/useSandbox';
 import { ref, watch } from '#imports';
 import type { ModuleColorMultiType } from '~/src/runtime/types';
@@ -11,6 +12,11 @@ type Emits = {
   (e: 'change', v: ModuleColorMultiType): void;
   (e: 'close'): void;
 };
+type Slot = {
+  color: Ref<string | undefined>;
+  hide: () => void;
+  show: (event: MouseEvent) => void;
+};
 
 const props = defineProps<Props>();
 const emit = defineEmits<Emits>();
@@ -18,7 +24,7 @@ const sandbox = useSandbox();
 
 const innerValue = ref(props.modelValue);
 
-const sharedVariables = {
+const sharedVariables: Slot = {
   color: innerValue,
   hide,
   show

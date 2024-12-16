@@ -12,6 +12,10 @@ A module that adds a convenient, customizable ColorPicker component to select co
 
 > This module works with Nuxt 3 only
 
+<div style="text-align: center;">
+  <a style="font-size: 24px;" href="https://nuxt-color-picker.nuxt.dev/">DEMO</a>
+</div>
+
 ## Features
 
 - Easy connection
@@ -21,7 +25,7 @@ A module that adds a convenient, customizable ColorPicker component to select co
 - Color selection history
 - Initial color display
 - Alpha range availability
-
+- 
 ## Usage
 
 Install the module:
@@ -36,6 +40,102 @@ npm install nuxt-color-picker
 export default defineNuxtConfig({
   modules: ["nuxt-color-picker"]
 })
+```
+
+## Components
+
+* ### ColorPicker
+
+The component is a wrapper for any html block, to implement its own ColorPicker menu disclosure button.
+
+```ts
+// Configuration types
+type Props = {
+  modelValue?: string; // v-model
+};
+type Emits = {
+  (e: 'update:modelValue', v: string): void; // v-model
+  (e: 'change', v: ModuleColorMultiType): void;
+  (e: 'close'): void;
+};
+type Slot = {
+  color: Ref<string | undefined>;
+  hide: () => void;
+  show: (event: MouseEvent) => void;
+};
+```
+
+
+```vue
+<!-- Usage -->
+<script lang="ts" setup>
+  const refVariable = ref('#000');
+</script>
+
+<template>
+  <color-picker
+    v-model="refVariable"
+    v-slot="{ color, show }"
+    @change="console.log('New color:', $event)"
+    @close="console.log('ColorPicker is closed')"
+  >
+    Current color: {{ color }}
+    <button @click="show">OPEN</button>
+  </color-picker>
+</template>
+```
+
+* ### ColorPickerBlock
+
+```ts
+// Configuration types
+type Props = {
+  modelValue?: string; // v-model
+};
+type Emits = {
+  (e: 'update:modelValue', v: string): void; // v-model
+  (e: 'change', v: ModuleColorMultiType): void;
+};
+```
+
+```vue
+<!-- Usage -->
+<script lang="ts" setup>
+  const refVariable = ref('#000');
+</script>
+
+<template>
+  Current color: {{ refVariable }}
+  <color-picker-block
+    v-model="refVariable"
+    @change="console.log('New color:', $event)"
+  />
+</template>
+```
+
+## Types
+
+```ts
+type ModuleRGB = {
+  r: number;
+  g: number;
+  b: number;
+};
+type ModuleRGBA = ModuleRGB & {
+  a: number;
+};
+type ModuleHSV = {
+  h: number;
+  s: number;
+  v: number;
+};
+type ModuleHEX = string;
+
+type ModuleColorMultiType = {
+  rgba: ModuleRGBA;
+  hsv: ModuleHSV;
+  hex: ModuleHEX;
+};
 ```
 
 ## Development
