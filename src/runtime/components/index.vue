@@ -6,6 +6,12 @@ import type { ModuleColorMultiType } from '~/src/runtime/types';
 
 type Props = {
   modelValue?: string;
+  storageKey?: string;
+  withAlpha?: boolean;
+  withColorsHistory?: boolean | number;
+  withInitialColor?: boolean;
+  withEyeDropper?: boolean;
+  immediateEmit?: boolean;
 };
 type Emits = {
   (e: 'update:modelValue', v: string): void;
@@ -38,9 +44,7 @@ function show(event: MouseEvent) {
       x: event.pageX,
       y: event.pageY
     },
-    {
-      modelValue: props.modelValue
-    },
+    props,
     {
       'update:modelValue': (event) => {
         emit('update:modelValue', event);

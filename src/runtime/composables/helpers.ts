@@ -152,7 +152,7 @@ export function rgb2hsv(rgb: ModuleRGB): ModuleHSV {
 
   return { h, s, v };
 }
-export function any2rgbahsv(color: any): ModuleRGBAHSV {
+export function any2rgbahsv(color: any, alphaEnabled = true): ModuleRGBAHSV {
   let rgba: any = { r: 0, g: 0, b: 0, a: 1 };
 
   if (/#/.test(color)) {
@@ -169,6 +169,7 @@ export function any2rgbahsv(color: any): ModuleRGBAHSV {
   const { r, g, b } = rgba;
   const { h, s, v } = rgb2hsv(rgba);
   a = Math.round((a === undefined ? 1 : a) * 100) / 100;
+  if (!alphaEnabled) a = 1;
 
   return {
     r,
@@ -179,6 +180,9 @@ export function any2rgbahsv(color: any): ModuleRGBAHSV {
     s,
     v
   };
+}
+export function any2hex(color: any, alphaEnabled = true): ModuleHEX {
+  return rgba2hex(any2rgbahsv(color, alphaEnabled));
 }
 
 export function isUndefined(value: any): value is undefined {

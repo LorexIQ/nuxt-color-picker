@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { rgba2hex, rgb2rgbHue, any2rgbahsv } from '../composables/helpers';
+import { rgba2hex, rgb2rgbHue, any2rgbahsv, any2hex } from '../composables/helpers';
 import type {
   ModuleColorMultiType,
   ModuleHSV,
@@ -20,6 +20,12 @@ import { ref, reactive, computed, watch, nextTick } from '#imports';
 
 type Props = {
   modelValue?: string;
+  storageKey?: string;
+  withAlpha?: boolean;
+  withColorsHistory?: boolean | number;
+  withInitialColor?: boolean;
+  withEyeDropper?: boolean;
+  immediateEmit?: boolean;
 };
 type Emits = {
   (e: 'update:modelValue', v: string): void;
@@ -27,17 +33,25 @@ type Emits = {
 };
 
 const props = withDefaults(defineProps<Props>(), {
-  modelValue: '#000000'
+  modelValue: '#000000',
+  storageKey: 'history',
+  withAlpha: false,
+  withColorsHistory: false,
+  withInitialColor: false,
+  withEyeDropper: false,
+  immediateEmit: false
 });
 const emit = defineEmits<Emits>();
 
-const isPreventSelects = ref(false);
-const isEyeDropper = ref(!!window.EyeDropper);
+const isAlphaBlock = computed(() => props.withAlpha);
+const isColorsHistoryBlock = computed(() => props.withColorsHistory && defaultColorsHistory.length);
+const isInitialColorBlock = computed(() => props.withInitialColor);
+const isEyeDropperBlock = computed(() => props.withEyeDropper && !!window.EyeDropper);
 
 const modelRgba = ref('');
 const modelHex = ref('');
 const containerRef = ref<HTMLDivElement>();
-const oldColor = ref(props.modelValue);
+const oldColor = ref(any2hex(props.modelValue, isAlphaBlock.value));
 const hueColor = reactive<ModuleRGBH>({
   r: 0,
   g: 0,
@@ -53,26 +67,40 @@ const fullColorSpector = reactive<ModuleRGBAHSV>({
   s: 0,
   v: 0
 });
+const isPreventSelects = ref(false);
+const defaultColorsHistory = reactive<string[]>([
+  '#FFB243',
+  '#FFE623',
+  '#6EFF2A',
+  '#1BC7B1',
+  '#00BEFF',
+  '#2E81FF',
+  '#BF3DCE',
+  '#8E00A7',
+  '#00000000'
+]);
 
 const rgba = computed<ModuleRGBA>(() => ({ r: fullColorSpector.r, g: fullColorSpector.g, b: fullColorSpector.b, a: fullColorSpector.a }));
 const hsv = computed<ModuleHSV>(() => ({ h: fullColorSpector.h, s: fullColorSpector.s, v: fullColorSpector.v }));
+const rgbStringShort = computed(() => `${fullColorSpector.r}, ${fullColorSpector.g}, ${fullColorSpector.b}`);
 const rgbaStringShort = computed(() => `${fullColorSpector.r}, ${fullColorSpector.g}, ${fullColorSpector.b}, ${fullColorSpector.a}`);
 const rgbaString = computed(() => `rgba(${rgbaStringShort.value})`);
 const hexString = computed(() => rgba2hex(rgba.value, true));
 
 initColorValue();
 initHueColor();
+initDefaultColors();
 
-watch(hexString, value => emit('update:modelValue', value));
+watch(hexString, value => emit('update:modelValue', value), { immediate: props.immediateEmit });
 watch(rgba, value => emit('change', {
   rgba: value,
   hsv: hsv.value,
   hex: modelHex.value
-}));
+}), { immediate: props.immediateEmit });
 
 function setText() {
   modelHex.value = hexString.value;
-  modelRgba.value = rgbaStringShort.value;
+  modelRgba.value = isAlphaBlock.value ? rgbaStringShort.value : rgbStringShort.value;
 }
 function handleInputFocus(status: boolean) {
   isPreventSelects.value = status;
@@ -90,16 +118,25 @@ function withPreventSelects(handler: () => any) {
 }
 
 function initColorValue() {
-  Object.assign(fullColorSpector, any2rgbahsv(props.modelValue));
+  Object.assign(fullColorSpector, any2rgbahsv(props.modelValue, isAlphaBlock.value));
   setText();
 }
 function initHueColor() {
-  const { r, g, b } = any2rgbahsv(props.modelValue);
+  const { r, g, b } = any2rgbahsv(props.modelValue, isAlphaBlock.value);
   Object.assign(hueColor, rgb2rgbHue({ r, g, b }));
+}
+function initDefaultColors() {
+  const defaultColorsLength = defaultColorsHistory.length - (isAlphaBlock.value ? 0 : 1);
+  const setting = props.withColorsHistory;
+  const countOfColors = typeof setting === 'number'
+    ? setting < 1 ? 0 : setting > defaultColorsLength ? defaultColorsLength : setting
+    : setting ? defaultColorsLength : 0;
+
+  defaultColorsHistory.splice(countOfColors);
 }
 
 function selectSaturation(color: ModuleRGB) {
-  const { r, g, b, h, s, v } = any2rgbahsv(color);
+  const { r, g, b, h, s, v } = any2rgbahsv(color, isAlphaBlock.value);
   Object.assign(fullColorSpector, { r, g, b, h, s, v });
   setText();
 }
@@ -118,7 +155,7 @@ function selectEyeDropper(color: string) {
 }
 async function selectColor(color: string) {
   withPreventSelects(() => {
-    const { r, g, b, a, h, s, v } = any2rgbahsv(color);
+    const { r, g, b, a, h, s, v } = any2rgbahsv(color, isAlphaBlock.value);
     Object.assign(fullColorSpector, { r, g, b, a, h, s, v });
     Object.assign(hueColor, rgb2rgbHue({ r, g, b }));
     setText();
@@ -126,14 +163,14 @@ async function selectColor(color: string) {
 }
 
 function inputHex(color: string) {
-  const { r, g, b, a, h, s, v } = any2rgbahsv(color);
+  const { r, g, b, a, h, s, v } = any2rgbahsv(color, isAlphaBlock.value);
   Object.assign(fullColorSpector, { r, g, b, a, h, s, v });
   Object.assign(hueColor, rgb2rgbHue({ r, g, b }));
   modelHex.value = color.toUpperCase();
   modelRgba.value = rgbaStringShort.value;
 }
 function inputRgba(color: string) {
-  const { r, g, b, a, h, s, v } = any2rgbahsv(color);
+  const { r, g, b, a, h, s, v } = any2rgbahsv(color, isAlphaBlock.value);
   Object.assign(fullColorSpector, { r, g, b, a, h, s, v });
   Object.assign(hueColor, rgb2rgbHue({ r, g, b }));
   modelHex.value = hexString.value;
@@ -149,6 +186,10 @@ defineExpose({
   <div
     ref="containerRef"
     class="CP-block"
+    :class="{
+      'CP-block--with-alpha': withAlpha,
+      'CP-block--with-eye-dropper': isEyeDropperBlock,
+    }"
   >
     <div class="CP-block__pickers">
       <Saturation
@@ -164,22 +205,22 @@ defineExpose({
         @select="selectHue"
       />
       <Alpha
+        v-if="isAlphaBlock"
         class="CP-block__pickers__alpha"
         :rgba="rgba"
         @select="selectAlpha"
       />
     </div>
-    <div
-      class="CP-block__rows"
-      :class="{ 'CP-block__rows--with-eye-dropper': isEyeDropper }"
-    >
+    <div class="CP-block__rows">
       <Preview
         class="CP-block__rows__preview"
-        :old-color="oldColor"
         :color="rgbaString"
+        :old-color="isInitialColorBlock ? oldColor : undefined"
+        @select="selectColor"
       />
       <EyeDropper
-        v-if="isEyeDropper"
+        v-if="isEyeDropperBlock"
+        class="CP-block__rows__eye-dropper"
         @select="selectEyeDropper"
       />
       <Box
@@ -191,25 +232,19 @@ defineExpose({
       />
       <Box
         class="CP-block__rows__rgba"
-        name="RGBA"
+        :name="withAlpha ? 'RGBA' : 'RGB'"
         :color="modelRgba"
         @input-color="inputRgba"
         @input-focus="handleInputFocus"
       />
       <Colors
+        v-if="isColorsHistoryBlock"
         class="CP-block__rows__colors"
         :color="hexString"
-        :colors-default="[
-          '#FFB243',
-          '#FFE623',
-          '#6EFF2A',
-          '#1BC7B1',
-          '#00BEFF',
-          '#2E81FF',
-          '#BF3DCE',
-          '#8E00A7',
-          '#00000000',
-        ]"
+        :old-color="oldColor"
+        :colors-default="defaultColorsHistory"
+        :storage-key="storageKey"
+        :with-alpha="isAlphaBlock"
         @select="selectColor"
       />
     </div>
@@ -225,7 +260,7 @@ defineExpose({
   display: flex;
   flex-direction: column;
   gap: 8px;
-  width: 218px;
+  width: 195px;
   height: max-content;
   padding: 10px;
   background: var(--colorPickerBg);
@@ -239,36 +274,43 @@ defineExpose({
   }
   &__rows {
     display: grid;
-    grid-template-areas:
-      "PREVIEW PREVIEW"
-      "HEX HEX"
-      "RGBA RGBA"
-      "COLORS COLORS";
+    //grid-template-areas:
+    //  "PREVIEW PREVIEW"
+    //  "HEX HEX"
+    //  "RGBA RGBA"
+    //  "COLORS COLORS";
     grid-template-columns: auto 30px;
-    grid-template-rows: 30px repeat(3, auto);
+    grid-template-rows: 30px auto;
     gap: 8px;
 
     &__preview {
-      grid-area: PREVIEW;
+      grid-area: 1 / 1 / 2 / 3;
+    }
+    &__eye-dropper {
+      grid-area: 1 / 2 / 2 / 3;
     }
     &__hex {
-      grid-area: HEX;
+      grid-area: 2 / 1 / 3 / 3;
     }
     &__rgba {
-      grid-area: RGBA;
+      grid-area: 3 / 1 / 4 / 3;
     }
     &__colors {
-      grid-area: COLORS;
+      grid-area: 4 / 1 / 5 / 3;
     }
+  }
 
-    &--with-eye-dropper {
-      grid-template-areas:
-        "PREVIEW EYEDROPPER"
-        "HEX HEX"
-        "RGBA RGBA"
-        "COLORS COLORS";
+  &--with-alpha {
+    width: 218px;
+  }
+  &--with-eye-dropper {
+    & .CP-block__rows {
       grid-template-columns: auto 38px;
-      grid-template-rows: 38px auto auto;
+      grid-template-rows: 38px auto;
+
+      &__preview {
+        grid-area: 1 / 1 / 2 / 2;
+      }
     }
   }
 }

@@ -7,6 +7,12 @@ type Props = {
   sandboxSize: ModuleSandboxSize;
   position: ModuleStylesXY;
   modelValue?: string;
+  storageKey?: string;
+  withAlpha?: boolean;
+  withColorsHistory?: boolean | number;
+  withInitialColor?: boolean;
+  withEyeDropper?: boolean;
+  immediateEmit?: boolean;
 };
 type Emits = {
   (e: 'update:modelValue', v: string): void;
@@ -58,7 +64,7 @@ onMounted(() => {
       ref="componentRef"
       class="CP-absolute__component"
       :style="componentPosition"
-      :model-value="modelValue"
+      v-bind="props"
       @update:model-value="emit('update:modelValue', $event)"
       @change="emit('change', $event)"
     />
