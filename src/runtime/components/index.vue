@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import type { Ref } from 'vue';
 import useSandbox from '../composables/useSandbox';
+import type { ModuleColorMultiType } from '../types';
 import { ref, watch } from '#imports';
-import type { ModuleColorMultiType } from '~/src/runtime/types';
 
 type Props = {
   modelValue?: string;
