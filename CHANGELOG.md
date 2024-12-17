@@ -1,6 +1,31 @@
 # Changelog
 
 
+## v1.2.0
+
+[compare changes](https://github.com/LorexIQ/nuxt-color-picker/compare/v1.1.3...v1.2.0)
+
+### 🚀 Enhancements
+
+- Добавлена защита от перезаписывания цвета, если colorPicker был открыт и закрыт ([0b642bb](https://github.com/LorexIQ/nuxt-color-picker/commit/0b642bb))
+- Добавлена возможность выбора начального цвета нажатием по нему ([ebf3852](https://github.com/LorexIQ/nuxt-color-picker/commit/ebf3852))
+- Добавлена возможность настройки блоков alpha, initColor, colorsHistory и eyeDropper ([5e9cbb2](https://github.com/LorexIQ/nuxt-color-picker/commit/5e9cbb2))
+- Добавлена возможность настройки блоков hexInput и rgbInput ([2b1a68f](https://github.com/LorexIQ/nuxt-color-picker/commit/2b1a68f))
+
+### 🩹 Fixes
+
+- Исправлена вёрстка playground на телефонах ([fa02a2b](https://github.com/LorexIQ/nuxt-color-picker/commit/fa02a2b))
+
+### 📖 Documentation
+
+- Описана документация нового функционала ([57465d3](https://github.com/LorexIQ/nuxt-color-picker/commit/57465d3))
+- Исправлена документация ([e296a2c](https://github.com/LorexIQ/nuxt-color-picker/commit/e296a2c))
+- Исправлена документация ([13b9ee3](https://github.com/LorexIQ/nuxt-color-picker/commit/13b9ee3))
+
+### ❤️ Contributors
+
+- LorexIQ <i@liq-mail.ru>
+
 ## v1.1.3
 
 [compare changes](https://github.com/LorexIQ/nuxt-color-picker/compare/v1.1.2...v1.1.3)
