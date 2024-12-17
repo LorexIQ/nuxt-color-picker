@@ -95,7 +95,6 @@ type Slot = {
 The component is the main block of the Color Picker. It is always open and can be integrated as a block, anywhere in the application.
 
 ```ts
-// Configuration types
 type Props = {
   modelValue?: string;
   storageKey?: string;
