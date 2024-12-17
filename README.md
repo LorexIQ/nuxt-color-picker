@@ -1,4 +1,4 @@
-[![nuxt-color-picker](./docs/poster.png)](./docs/poster.png)
+[![nuxt-color-picker](https://raw.githubusercontent.com/LorexIQ/nuxt-color-picker/master/docs/poster.png)](https://raw.githubusercontent.com/LorexIQ/nuxt-color-picker/master/docs/poster.png)
 
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
@@ -18,7 +18,7 @@ A module that adds a convenient, customizable ColorPicker component to select co
 ## Features
 
 - Easy connection
-- Customization of component colors
+- Full component customisation
 - Two use cases (as color-picker and as color-picker-block)
 - EyeDropper support
 - Color selection history
@@ -48,9 +48,16 @@ export default defineNuxtConfig({
 The component is a wrapper for any html block, to implement its own ColorPicker menu disclosure button.
 
 ```ts
-// Configuration types
 type Props = {
-  modelValue?: string; // v-model
+  modelValue?: string;
+  storageKey?: string;
+  withAlpha?: boolean;
+  withInitialColor?: boolean;
+  withEyeDropper?: boolean;
+  withHexInput?: boolean;
+  withRgbInput?: boolean;
+  withColorsHistory?: boolean | number;
+  immediateEmit?: boolean;
 };
 type Emits = {
   (e: 'update:modelValue', v: string): void; // v-model
@@ -66,7 +73,6 @@ type Slot = {
 
 
 ```vue
-<!-- Usage -->
 <script lang="ts" setup>
   const refVariable = ref('#000');
 </script>
@@ -91,7 +97,15 @@ The component is the main block of the Color Picker. It is always open and can b
 ```ts
 // Configuration types
 type Props = {
-  modelValue?: string; // v-model
+  modelValue?: string;
+  storageKey?: string;
+  withAlpha?: boolean;
+  withInitialColor?: boolean;
+  withEyeDropper?: boolean;
+  withHexInput?: boolean;
+  withRgbInput?: boolean;
+  withColorsHistory?: boolean | number;
+  immediateEmit?: boolean;
 };
 type Emits = {
   (e: 'update:modelValue', v: string): void; // v-model
@@ -100,7 +114,6 @@ type Emits = {
 ```
 
 ```vue
-<!-- Usage -->
 <script lang="ts" setup>
   const refVariable = ref('#000');
 </script>
@@ -113,6 +126,38 @@ type Emits = {
   />
 </template>
 ```
+
+## Components configuration
+
+### Properties
+
+| Name              |       Type        | Default | Description                                                                                                                                                                                                                             |
+|-------------------|:-----------------:|:-------:|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| modelValue        |      string       | #000000 | v-model variable that adds two-way communication                                                                                                                                                                                        |
+| storageKey        |      string       | history | A modifier key in the storage to save the color history                                                                                                                                                                                 |
+| withAlpha         |      boolean      |  false  | It includes an alpha spectrum block and the ability to work with the alpha range of colors                                                                                                                                              |
+| withInitialColor  |      boolean      |  false  | Enables the display of the initial color with which the block was originally opened with the possibility of rolling back                                                                                                                |
+| withEyeDropper    |      boolean      |  false  | Includes the EyeDropper block (if supported), which allows you to use color copying                                                                                                                                                     |
+| withHexInput      |      boolean      |  false  | Includes a block for manually entering the hex value color. When WithAlpha is enabled, the alpha range is added                                                                                                                         |
+| withRgbInput      |      boolean      |  false  | Includes a block for manually entering the rgb color value. When WithAlpha is enabled, the alpha range is added                                                                                                                         |
+| withColorsHistory | boolean \| number |  false  | Includes the color history block. Specifying a number - sets the `number` of colors to display (1<=n<=9). Specifying `true` sets the maximum possible number of colors. When withAlpha is turned off, the maximum number of colors is 8 |
+| immediateEmit     |      boolean      |  false  | Enables calling a color change event when mounting a component                                                                                                                                                                          |
+
+### Events
+
+| Name              |         Type         | Description                                                                       |
+|-------------------|:--------------------:|-----------------------------------------------------------------------------------|
+| update:modelValue |        string        | v-model system event for updating the value                                       |
+| change            | ModuleColorMultiType | Called when the color changes and returns a new color in rgba, hsv and hex values |
+| close             |         void         | Called when the ColorPicker window is closed                                      |
+
+### Slots
+
+| Name  | Type                        | Description                                                                                                  |
+|-------|-----------------------------|--------------------------------------------------------------------------------------------------------------|
+| color | Ref<string \| undefined>    | Current, selected, reactive color                                                                            |
+| hide  | () => void                  | The function that closes the ColorPicker window                                                              |
+| show  | (event: MouseEvent) => void | The function that opens the ColorPicker window (requires MouseEvent to calculate the position of the window) |
 
 ## Types
 
@@ -138,6 +183,16 @@ type ModuleColorMultiType = {
   hex: ModuleHEX;
 };
 ```
+
+## Configuration examples
+
+|            |    ![all-off](https://raw.githubusercontent.com/LorexIQ/nuxt-color-picker/master/docs/all-off.png)    |                                          ![all-on](https://raw.githubusercontent.com/LorexIQ/nuxt-color-picker/master/docs/all-on.png)                                           |                ![hex-4colors-without-alpha](https://raw.githubusercontent.com/LorexIQ/nuxt-color-picker/master/docs/hex-4colors-without-alpha.png)                 |
+|------------|:------------------------------------:|:---------------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------:|
+| Equipment  |              **Basic**               |                                                    **Full**                                                     |                                    **Only HEX with 4 colors**                                     |
+| Properties |                                      | with-alpha<br>with-initial-color<br>with-eye-dropper<br>with-hex-input<br>with-rgb-input<br>with-colors-history |                            with-hex-input<br>:with-colors-history="4"                             |
+|            | ![only-alpha](https://raw.githubusercontent.com/LorexIQ/nuxt-color-picker/master/docs/only-alpha.png) |                                    ![rgba-initial](https://raw.githubusercontent.com/LorexIQ/nuxt-color-picker/master/docs/rgba-initial.png)                                     |                            ![without-alpha](https://raw.githubusercontent.com/LorexIQ/nuxt-color-picker/master/docs/without-alpha.png)                             |
+| Equipment  |            **Only alpha**            |                                              **RGBA with initial**                                              |                                       **All without alpha**                                       |
+| Properties |              with-alpha              |                               with-alpha<br>with-initial-color<br>with-rgb-input                                | with-initial-color<br>with-eye-dropper<br>with-hex-input<br>with-rgb-input<br>with-colors-history |
 
 ## Development
 
