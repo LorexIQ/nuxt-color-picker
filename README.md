@@ -60,7 +60,7 @@ type Props = {
   immediateEmit?: boolean;
 };
 type Emits = {
-  (e: 'update:modelValue', v: string): void; // v-model
+  (e: 'update:modelValue', v: string): void;
   (e: 'change', v: ModuleColorMultiType): void;
   (e: 'close'): void;
 };
@@ -108,7 +108,7 @@ type Props = {
   immediateEmit?: boolean;
 };
 type Emits = {
-  (e: 'update:modelValue', v: string): void; // v-model
+  (e: 'update:modelValue', v: string): void;
   (e: 'change', v: ModuleColorMultiType): void;
 };
 ```
@@ -186,13 +186,13 @@ type ModuleColorMultiType = {
 
 ## Configuration examples
 
-|            |    ![all-off](https://raw.githubusercontent.com/LorexIQ/nuxt-color-picker/master/docs/all-off.png)    |                                          ![all-on](https://raw.githubusercontent.com/LorexIQ/nuxt-color-picker/master/docs/all-on.png)                                           |                ![hex-4colors-without-alpha](https://raw.githubusercontent.com/LorexIQ/nuxt-color-picker/master/docs/hex-4colors-without-alpha.png)                 |
-|------------|:------------------------------------:|:---------------------------------------------------------------------------------------------------------------:|:-------------------------------------------------------------------------------------------------:|
-| Equipment  |              **Basic**               |                                                    **Full**                                                     |                                    **Only HEX with 4 colors**                                     |
-| Properties |                                      | with-alpha<br>with-initial-color<br>with-eye-dropper<br>with-hex-input<br>with-rgb-input<br>with-colors-history |                            with-hex-input<br>:with-colors-history="4"                             |
-|            | ![only-alpha](https://raw.githubusercontent.com/LorexIQ/nuxt-color-picker/master/docs/only-alpha.png) |                                    ![rgba-initial](https://raw.githubusercontent.com/LorexIQ/nuxt-color-picker/master/docs/rgba-initial.png)                                     |                            ![without-alpha](https://raw.githubusercontent.com/LorexIQ/nuxt-color-picker/master/docs/without-alpha.png)                             |
-| Equipment  |            **Only alpha**            |                                              **RGBA with initial**                                              |                                       **All without alpha**                                       |
-| Properties |              with-alpha              |                               with-alpha<br>with-initial-color<br>with-rgb-input                                | with-initial-color<br>with-eye-dropper<br>with-hex-input<br>with-rgb-input<br>with-colors-history |
+|            |    ![all-off](https://raw.githubusercontent.com/LorexIQ/nuxt-color-picker/master/docs/all-off.png)    |          ![all-on](https://raw.githubusercontent.com/LorexIQ/nuxt-color-picker/master/docs/all-on.png)          | ![hex-4colors-without-alpha](https://raw.githubusercontent.com/LorexIQ/nuxt-color-picker/master/docs/hex-4colors-without-alpha.png) |
+|------------|:-----------------------------------------------------------------------------------------------------:|:---------------------------------------------------------------------------------------------------------------:|:-----------------------------------------------------------------------------------------------------------------------------------:|
+| Equipment  |                                               **Basic**                                               |                                                    **Full**                                                     |                                                     **Only HEX with 4 colors**                                                      |
+| Properties |                                                                                                       | with-alpha<br>with-initial-color<br>with-eye-dropper<br>with-hex-input<br>with-rgb-input<br>with-colors-history |                                             with-hex-input<br>:with-colors-history="4"                                              |
+|            | ![only-alpha](https://raw.githubusercontent.com/LorexIQ/nuxt-color-picker/master/docs/only-alpha.png) |    ![rgba-initial](https://raw.githubusercontent.com/LorexIQ/nuxt-color-picker/master/docs/rgba-initial.png)    |             ![without-alpha](https://raw.githubusercontent.com/LorexIQ/nuxt-color-picker/master/docs/without-alpha.png)             |
+| Equipment  |                                            **Only alpha**                                             |                                              **RGBA with initial**                                              |                                                        **All without alpha**                                                        |
+| Properties |                                              with-alpha                                               |                               with-alpha<br>with-initial-color<br>with-rgb-input                                |                  with-initial-color<br>with-eye-dropper<br>with-hex-input<br>with-rgb-input<br>with-colors-history                  |
 
 ## Development
 
