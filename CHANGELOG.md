@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.2.2
+
+[compare changes](https://github.com/LorexIQ/nuxt-color-picker/compare/v1.2.1...v1.2.2)
+
+### 🩹 Fixes
+
+- Исправлен путь до типов в event change ([759e09d](https://github.com/LorexIQ/nuxt-color-picker/commit/759e09d))
+
+### ❤️ Contributors
+
+- LorexIQ <i@liq-mail.ru>
+
 ## v1.2.1
 
 [compare changes](https://github.com/LorexIQ/nuxt-color-picker/compare/v1.2.0...v1.2.1)
