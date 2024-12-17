@@ -1,11 +1,14 @@
 <script lang="ts" setup>
 import { onUnmounted } from 'vue';
-import { createAlphaSquare } from '../composables/helpers';
-import { onMounted, reactive } from '#imports';
+import { any2hex, createAlphaSquare } from '../composables/helpers';
+import { computed, onMounted, reactive } from '#imports';
 
 type Props = {
+  oldColor: string;
   color: string;
   colorsDefault: string[];
+  storageKey: string;
+  withAlpha: boolean;
 };
 type Emits = {
   (e: 'select', v: string): void;
@@ -14,32 +17,46 @@ type Emits = {
 const props = defineProps<Props>();
 const emit = defineEmits<Emits>();
 
-const maxStorageColors = 9;
-const storageKey = 'nuxt-color-picker:history';
+const storageKey = computed(() => `nuxt-color-picker:${props.storageKey}`);
+const countOfColors = computed(() => props.colorsDefault.length);
 const colorsHistory = reactive([...props.colorsDefault]);
 const imgAlphaBase64 = `url(${createAlphaSquare(4).toDataURL()})`;
 
 function readStorage() {
-  const storageData = localStorage.getItem(storageKey);
+  const storageData = localStorage.getItem(storageKey.value);
 
-  if (storageData) colorsHistory.unshift(...(JSON.parse(storageData) || []));
+  try {
+    if (storageData) {
+      const preparedStorageData = JSON.parse(storageData).map((color: string) => any2hex(color, props.withAlpha));
 
-  colorsHistory.splice(maxStorageColors);
+      const uniqueColors: string[] = [];
+      for (const color of [...(preparedStorageData || []), ...colorsHistory]) {
+        if (uniqueColors.length >= countOfColors.value) continue;
+        if (!uniqueColors.includes(color)) uniqueColors.push(color);
+      }
+
+      colorsHistory.splice(0);
+      colorsHistory.push(...uniqueColors);
+    }
+  } catch (e) {
+    console.error(e);
+  }
 }
 function saveStorage() {
   const color = props.color;
+  const oldColor = props.oldColor;
 
-  if (!color) return;
+  if (!color || color === oldColor) return;
 
   const colors = colorsHistory;
   const index = colors.indexOf(color);
 
   if (index !== -1) colors.splice(index, 1);
 
-  colors.splice(maxStorageColors);
+  colors.splice(countOfColors.value);
   colors.unshift(color);
 
-  localStorage.setItem(storageKey, JSON.stringify(colors));
+  localStorage.setItem(storageKey.value, JSON.stringify(colors));
 }
 function select(color: string) {
   emit('select', color);
@@ -76,14 +93,16 @@ onUnmounted(() => {
   overflow: hidden;
 
   &__items {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, 16px);
+    display: flex;
     justify-content: space-between;
+    width: 100%;
+    gap: 8px;
 
     &__item {
       position: relative;
-      width: 16px;
+      width: 100%;
       height: 16px;
+      border-radius: 0;
       transition: .3s;
       cursor: pointer;
 
