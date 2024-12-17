@@ -90,7 +90,15 @@ function openLink(link: string) {
       <div class="index-page__main__logo">
         Nuxt Color Picker
       </div>
-      <color-picker-block v-model="selectedColor" />
+      <color-picker-block
+        v-model="selectedColor"
+        immediate-emit
+        with-eye-dropper
+        with-colors-history
+        with-initial-color
+        with-alpha
+        storage-key="main"
+      />
       <div
         class="index-page__main__tip"
         :class="{ 'index-page__main__tip--hide': isHideTip }"
@@ -122,6 +130,10 @@ function openLink(link: string) {
         <color-picker
           v-slot="{ show, color }"
           v-model="themeColors[key]"
+          with-eye-dropper
+          with-colors-history
+          with-initial-color
+          with-alpha
         >
           <div
             class="index-page__colors__color__value"
@@ -195,6 +207,7 @@ html, body {
       position: fixed;
       right: 0;
       top: 0;
+      z-index: 3;
       width: 200px;
       height: 30px;
       line-height: 30px;
@@ -214,6 +227,7 @@ html, body {
     &__logo {
       font-size: 48px;
       font-weight: 600;
+      text-align: center;
       display: flex;
       justify-content: center;
       padding-top: 100px;
