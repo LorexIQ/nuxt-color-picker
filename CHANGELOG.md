@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v1.2.1
+
+[compare changes](https://github.com/LorexIQ/nuxt-color-picker/compare/v1.2.0...v1.2.1)
+
+### 🩹 Fixes
+
+- Исправлена загрузка глобальных стилей ([c403438](https://github.com/LorexIQ/nuxt-color-picker/commit/c403438))
+
+### ❤️ Contributors
+
+- LorexIQ <i@liq-mail.ru>
+
 ## v1.2.0
 
 [compare changes](https://github.com/LorexIQ/nuxt-color-picker/compare/v1.1.3...v1.2.0)
