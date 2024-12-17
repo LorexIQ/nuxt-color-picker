@@ -22,9 +22,11 @@ type Props = {
   modelValue?: string;
   storageKey?: string;
   withAlpha?: boolean;
-  withColorsHistory?: boolean | number;
   withInitialColor?: boolean;
   withEyeDropper?: boolean;
+  withHexInput?: boolean;
+  withRgbInput?: boolean;
+  withColorsHistory?: boolean | number;
   immediateEmit?: boolean;
 };
 type Emits = {
@@ -36,17 +38,21 @@ const props = withDefaults(defineProps<Props>(), {
   modelValue: '#000000',
   storageKey: 'history',
   withAlpha: false,
-  withColorsHistory: false,
   withInitialColor: false,
   withEyeDropper: false,
+  withHexInput: false,
+  withRgbInput: false,
+  withColorsHistory: false,
   immediateEmit: false
 });
 const emit = defineEmits<Emits>();
 
 const isAlphaBlock = computed(() => props.withAlpha);
-const isColorsHistoryBlock = computed(() => props.withColorsHistory && defaultColorsHistory.length);
 const isInitialColorBlock = computed(() => props.withInitialColor);
 const isEyeDropperBlock = computed(() => props.withEyeDropper && !!window.EyeDropper);
+const isHexInputBlock = computed(() => props.withHexInput);
+const isRGBInputBlock = computed(() => props.withRgbInput);
+const isColorsHistoryBlock = computed(() => props.withColorsHistory && defaultColorsHistory.length);
 
 const modelRgba = ref('');
 const modelHex = ref('');
@@ -224,6 +230,7 @@ defineExpose({
         @select="selectEyeDropper"
       />
       <Box
+        v-if="isHexInputBlock"
         class="CP-block__rows__hex"
         name="HEX"
         :color="modelHex"
@@ -231,6 +238,7 @@ defineExpose({
         @input-focus="handleInputFocus"
       />
       <Box
+        v-if="isRGBInputBlock"
         class="CP-block__rows__rgba"
         :name="withAlpha ? 'RGBA' : 'RGB'"
         :color="modelRgba"
@@ -274,29 +282,24 @@ defineExpose({
   }
   &__rows {
     display: grid;
-    //grid-template-areas:
-    //  "PREVIEW PREVIEW"
-    //  "HEX HEX"
-    //  "RGBA RGBA"
-    //  "COLORS COLORS";
     grid-template-columns: auto 30px;
-    grid-template-rows: 30px auto;
+    grid-template-rows: 30px;
     gap: 8px;
 
     &__preview {
-      grid-area: 1 / 1 / 2 / 3;
+      grid-area: auto / 1 / auto / 3;
     }
     &__eye-dropper {
-      grid-area: 1 / 2 / 2 / 3;
+      grid-area: auto / 2 / auto / 3;
     }
     &__hex {
-      grid-area: 2 / 1 / 3 / 3;
+      grid-area: auto / 1 / auto / 3;
     }
     &__rgba {
-      grid-area: 3 / 1 / 4 / 3;
+      grid-area: auto / 1 / auto / 3;
     }
     &__colors {
-      grid-area: 4 / 1 / 5 / 3;
+      grid-area: auto / 1 / auto / 3;
     }
   }
 
@@ -306,10 +309,10 @@ defineExpose({
   &--with-eye-dropper {
     & .CP-block__rows {
       grid-template-columns: auto 38px;
-      grid-template-rows: 38px auto;
+      grid-template-rows: 38px;
 
       &__preview {
-        grid-area: 1 / 1 / 2 / 2;
+        grid-area: auto / 1 / auto / 2;
       }
     }
   }

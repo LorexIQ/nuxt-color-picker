@@ -93,10 +93,12 @@ function openLink(link: string) {
       <color-picker-block
         v-model="selectedColor"
         immediate-emit
-        with-eye-dropper
-        with-colors-history
-        with-initial-color
         with-alpha
+        with-initial-color
+        with-eye-dropper
+        with-hex-input
+        with-rgb-input
+        with-colors-history
         storage-key="main"
       />
       <div
@@ -130,10 +132,12 @@ function openLink(link: string) {
         <color-picker
           v-slot="{ show, color }"
           v-model="themeColors[key]"
-          with-eye-dropper
-          with-colors-history
-          with-initial-color
           with-alpha
+          with-initial-color
+          with-eye-dropper
+          with-hex-input
+          with-rgb-input
+          with-colors-history
         >
           <div
             class="index-page__colors__color__value"

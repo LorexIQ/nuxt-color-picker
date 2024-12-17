@@ -8,9 +8,11 @@ type Props = {
   modelValue?: string;
   storageKey?: string;
   withAlpha?: boolean;
-  withColorsHistory?: boolean | number;
   withInitialColor?: boolean;
   withEyeDropper?: boolean;
+  withHexInput?: boolean;
+  withRgbInput?: boolean;
+  withColorsHistory?: boolean | number;
   immediateEmit?: boolean;
 };
 type Emits = {
