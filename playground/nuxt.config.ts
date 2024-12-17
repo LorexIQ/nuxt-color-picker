@@ -1,5 +1,6 @@
 export default defineNuxtConfig({
   modules: ['../src/module', '@nuxthub/core'],
+  // modules: ['../dist/module', '@nuxthub/core'],
 
   ssr: false,
 
