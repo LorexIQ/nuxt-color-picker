@@ -87,40 +87,43 @@ onUnmounted(() => {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .CP-colors {
   width: 100%;
   overflow: hidden;
+}
 
-  &__items {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    gap: 8px;
+.CP-colors__items {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 8px;
+}
 
-    &__item {
-      position: relative;
-      width: 100%;
-      height: 16px;
-      border-radius: 0;
-      transition: .3s;
-      cursor: pointer;
+.CP-colors__items__item {
+  position: relative;
+  width: 100%;
+  height: 16px;
+  border-radius: 0;
+  transition: 0.3s;
+  cursor: pointer;
+}
 
-      &::before, &::after {
-        content: '';
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-      }
-      &::before {
-        background: var(--alpha);
-      }
-      &::after {
-        background: var(--color);
-      }
-    }
-  }
+.CP-colors__items__item::before,
+.CP-colors__items__item::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.CP-colors__items__item::before {
+  background: var(--alpha);
+}
+
+.CP-colors__items__item::after {
+  background: var(--color);
 }
 </style>

@@ -136,43 +136,46 @@ defineExpose({
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .CP-canvas-picker {
   position: relative;
   width: 100%;
   height: 100%;
   cursor: pointer;
+}
 
-  &__slider {
-    position: absolute;
-    box-shadow: 0 0 1px 1px var(--colorPickerShadowIn);
-    box-sizing: border-box;
-  }
+.CP-canvas-picker__slider {
+  position: absolute;
+  box-shadow: 0 0 1px 1px var(--colorPickerShadowIn);
+  box-sizing: border-box;
+}
 
-  &--xy .CP-canvas-picker__slider {
-    left: 100px;
-    top: 0;
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    border: 1px solid var(--colorPickerSlider);
-    box-shadow: 0 0 2px 0.5px var(--colorPickerShadowIn) inset, 0 0 1px 1px var(--colorPickerShadowIn);
-  }
-  &--x .CP-canvas-picker__slider {
-    left: 100px;
-    top: 0;
-    width: 4px;
-    height: 100%;
-    border-radius: 2px;
-    background: var(--colorPickerSlider);
-  }
-  &--y .CP-canvas-picker__slider {
-    left: 0;
-    top: 100px;
-    width: 100%;
-    height: 4px;
-    border-radius: 2px;
-    background: var(--colorPickerSlider);
-  }
+.CP-canvas-picker--xy .CP-canvas-picker__slider {
+  left: 100px;
+  top: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid var(--colorPickerSlider);
+  box-shadow: 0 0 2px 0.5px var(--colorPickerShadowIn) inset,
+  0 0 1px 1px var(--colorPickerShadowIn);
+}
+
+.CP-canvas-picker--x .CP-canvas-picker__slider {
+  left: 100px;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  border-radius: 2px;
+  background: var(--colorPickerSlider);
+}
+
+.CP-canvas-picker--y .CP-canvas-picker__slider {
+  left: 0;
+  top: 100px;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--colorPickerSlider);
 }
 </style>

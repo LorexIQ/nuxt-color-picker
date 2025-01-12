@@ -259,11 +259,7 @@ defineExpose({
   </div>
 </template>
 
-<style lang="scss">
-
-</style>
-
-<style lang="scss" scoped>
+<style scoped>
 .CP-block {
   display: flex;
   flex-direction: column;
@@ -274,47 +270,51 @@ defineExpose({
   background: var(--colorPickerBg);
   border-radius: 5px;
   box-shadow: 0 0 16px 0 var(--colorPickerShadowOut);
+}
 
-  &__pickers {
-    display: grid;
-    grid-template-columns: 152px 15px 15px;
-    gap: 8px;
-  }
-  &__rows {
-    display: grid;
-    grid-template-columns: auto 30px;
-    grid-template-rows: 30px;
-    gap: 8px;
+.CP-block__pickers {
+  display: grid;
+  grid-template-columns: 152px 15px 15px;
+  gap: 8px;
+}
 
-    &__preview {
-      grid-area: auto / 1 / auto / 3;
-    }
-    &__eye-dropper {
-      grid-area: auto / 2 / auto / 3;
-    }
-    &__hex {
-      grid-area: auto / 1 / auto / 3;
-    }
-    &__rgba {
-      grid-area: auto / 1 / auto / 3;
-    }
-    &__colors {
-      grid-area: auto / 1 / auto / 3;
-    }
-  }
+.CP-block__rows {
+  display: grid;
+  grid-template-columns: auto 30px;
+  grid-template-rows: 30px;
+  gap: 8px;
+}
 
-  &--with-alpha {
-    width: 218px;
-  }
-  &--with-eye-dropper {
-    & .CP-block__rows {
-      grid-template-columns: auto 38px;
-      grid-template-rows: 38px;
+.CP-block__rows__preview {
+  grid-area: auto / 1 / auto / 3;
+}
 
-      &__preview {
-        grid-area: auto / 1 / auto / 2;
-      }
-    }
-  }
+.CP-block__rows__eye-dropper {
+  grid-area: auto / 2 / auto / 3;
+}
+
+.CP-block__rows__hex {
+  grid-area: auto / 1 / auto / 3;
+}
+
+.CP-block__rows__rgba {
+  grid-area: auto / 1 / auto / 3;
+}
+
+.CP-block__rows__colors {
+  grid-area: auto / 1 / auto / 3;
+}
+
+.CP-block--with-alpha {
+  width: 218px;
+}
+
+.CP-block--with-eye-dropper .CP-block__rows {
+  grid-template-columns: auto 38px;
+  grid-template-rows: 38px;
+}
+
+.CP-block--with-eye-dropper .CP-block__rows__preview {
+  grid-area: auto / 1 / auto / 2;
 }
 </style>

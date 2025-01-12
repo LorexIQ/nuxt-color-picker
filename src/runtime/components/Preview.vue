@@ -61,17 +61,17 @@ onMounted(() => {
   </div>
 </template>
 
-<style lang="scss" scoped>
+<style scoped>
 .CP-preview {
   position: relative;
+}
 
-  &__old {
-    position: absolute;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 50%;
-    cursor: pointer;
-  }
+.CP-preview__old {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 50%;
+  cursor: pointer;
 }
 </style>

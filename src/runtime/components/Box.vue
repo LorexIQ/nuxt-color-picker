@@ -39,35 +39,36 @@ function handleFocus(status: boolean) {
   </div>
 </template>
 
-<style lang="scss">
+<style>
 .CP-box {
   display: flex;
   font-size: 12px;
+}
 
-  &__name {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    float: left;
-    width: 60px;
-    height: 30px;
-    color: var(--colorPickerInputTitle);
-    background: var(--colorPickerInputTitleBg);
-    user-select: none;
-  }
-  &__value {
-    flex: 1;
-    min-width: 100px;
-    height: 30px;
-    padding: 0 12px;
-    border: 0;
-    color: var(--colorPickerInputText);
-    background: var(--colorPickerInputTextBg);
-    cursor: text;
+.CP-box__name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float: left;
+  width: 60px;
+  height: 30px;
+  color: var(--colorPickerInputTitle);
+  background: var(--colorPickerInputTitleBg);
+  user-select: none;
+}
 
-    &:focus {
-      outline: none;
-    }
-  }
+.CP-box__value {
+  flex: 1;
+  min-width: 100px;
+  height: 30px;
+  padding: 0 12px;
+  border: 0;
+  color: var(--colorPickerInputText);
+  background: var(--colorPickerInputTextBg);
+  cursor: text;
+}
+
+.CP-box__value:focus {
+  outline: none;
 }
 </style>

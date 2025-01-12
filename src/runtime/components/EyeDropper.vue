@@ -34,7 +34,7 @@ async function openDropper() {
   </div>
 </template>
 
-<style scoped lang="scss">
+<style scoped>
 .CP-eye-dropper {
   width: 38px;
   color: var(--colorPickerDropper);

@@ -44,7 +44,7 @@ onMounted(() => {
   </div>
 </template>
 
-<style scoped lang="scss">
+<style scoped>
 .CP-sandbox {
   position: absolute;
   top: 0;
@@ -52,22 +52,20 @@ onMounted(() => {
   bottom: 0;
   left: 0;
   pointer-events: none;
-
-  &__component {
-    z-index: 10;
-    pointer-events: all;
-  }
 }
 
-.fade {
-  &-enter-active, &-leave-active {
-    transition: .3s;
-  }
-  &-enter-to, &-leave-from {
-    opacity: 1;
-  }
-  &-leave-to, &-enter-from {
-    opacity: 0;
-  }
+.CP-sandbox__component {
+  z-index: 10;
+  pointer-events: all;
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: .3s;
+}
+.fade-enter-to, .fade-leave-from {
+  opacity: 1;
+}
+.fade-leave-to, .fade-enter-from {
+  opacity: 0;
 }
 </style>

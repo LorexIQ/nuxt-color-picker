@@ -73,7 +73,7 @@ onMounted(() => {
   </div>
 </template>
 
-<style scoped lang="scss">
+<style scoped>
 .CP-absolute {
   position: fixed;
   top: 0;
@@ -81,9 +81,9 @@ onMounted(() => {
   bottom: 0;
   left: 0;
   user-select: none;
+}
 
-  &__component {
-    position: absolute;
-  }
+.CP-absolute__component {
+  position: absolute;
 }
 </style>
