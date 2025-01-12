@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.2.4
+
+[compare changes](https://github.com/LorexIQ/nuxt-color-picker/compare/v1.2.3...v1.2.4)
+
+### 🩹 Fixes
+
+- Исправлена зависимость библиотеки от sass ([499f0b0](https://github.com/LorexIQ/nuxt-color-picker/commit/499f0b0))
+
+### ❤️ Contributors
+
+- LorexIQ <dmitrymurashko0@gmail.com>
+
 ## v1.2.2
 
 [compare changes](https://github.com/LorexIQ/nuxt-color-picker/compare/v1.2.1...v1.2.2)
