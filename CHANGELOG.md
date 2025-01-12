@@ -1,5 +1,17 @@
 # Changelog
 
+## v1.2.6
+
+[compare changes](https://github.com/LorexIQ/nuxt-color-picker/compare/v1.2.5...v1.2.6)
+
+### 🩹 Fixes
+
+- Все стили компонентов переписаны с sass на css ([39d7925](https://github.com/LorexIQ/nuxt-color-picker/commit/39d7925))
+
+### ❤️ Contributors
+
+- LorexIQ <dmitrymurashko0@gmail.com>
+
 ## v1.2.5
 
 [compare changes](https://github.com/LorexIQ/nuxt-color-picker/compare/v1.2.4...v1.2.5)
