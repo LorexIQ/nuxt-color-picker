@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { createAlphaSquare, hex2rgba } from '../../src/runtime/composables/helpers';
+import { hex2rgba } from '../../src/runtime/composables/helpers';
 import Down from '~/components/icons/Down.vue';
 import GitHub from '~/components/icons/GitHub.vue';
 
 const pageRef = ref<HTMLDivElement>();
 const colorsBlockRef = ref<HTMLDivElement>();
 const selectedColor = ref('#000000C4');
-const imgAlpha10Base64 = `url(${createAlphaSquare(10).toDataURL()})`;
-const imgAlpha4Base64 = `url(${createAlphaSquare(4).toDataURL()})`;
+const imgAlpha10Base64 = createAlphaSquare(10);
+const imgAlpha4Base64 = createAlphaSquare(4);
 const contrastColor = computed(() => pickContrastedByBGTextColor(selectedColor.value, '#fff', '#000'));
 const isHideTip = ref(false);
 
@@ -26,6 +26,23 @@ const themeColors = reactive({
 
 watch(registerColors, () => registerColors());
 
+function createAlphaSquare(size: number): string {
+  if (!document) return '';
+
+  const canvas = document.createElement('canvas');
+  const ctx: any = canvas.getContext('2d');
+  const doubleSize = size * 2;
+  canvas.width = doubleSize;
+  canvas.height = doubleSize;
+
+  ctx.fillStyle = '#ffffff';
+  ctx.fillRect(0, 0, doubleSize, doubleSize);
+  ctx.fillStyle = '#ccd5db';
+  ctx.fillRect(0, 0, size, size);
+  ctx.fillRect(size, size, size, size);
+
+  return `url(${canvas.toDataURL()})`;
+}
 function registerColors() {
   const stylePrepared = [
     ':root {',

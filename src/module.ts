@@ -9,15 +9,20 @@ export default defineNuxtModule({
 
     _nuxt.options.css.push(resolver.resolve('runtime', 'assets', 'main.css'));
 
-    addPlugin(resolver.resolve('./runtime/plugin'));
+    addPlugin({
+      src: resolver.resolve('./runtime/plugin'),
+      mode: 'client'
+    });
 
     await addComponent({
       name: 'ColorPicker',
-      filePath: resolver.resolve('runtime', 'components', 'index.vue')
+      filePath: resolver.resolve('runtime', 'components', 'index.vue'),
+      mode: 'client'
     });
     await addComponent({
       name: 'ColorPickerBlock',
-      filePath: resolver.resolve('runtime', 'components', 'ColorPickerBlock.vue')
+      filePath: resolver.resolve('runtime', 'components', 'ColorPickerBlock.vue'),
+      mode: 'client'
     });
   }
 });
