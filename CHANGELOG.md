@@ -1,5 +1,19 @@
 # Changelog
 
+## v1.2.8
+
+[compare changes](https://github.com/LorexIQ/nuxt-color-picker/compare/v1.2.7...v1.2.8)
+
+### 🩹 Fixes
+
+- Nuxt typecheck error ([17d71e0](https://github.com/LorexIQ/nuxt-color-picker/commit/17d71e0))
+- Исправлены дополнительные ошибки скрипта typecheck ([4715d59](https://github.com/LorexIQ/nuxt-color-picker/commit/4715d59))
+
+### ❤️ Contributors
+
+- LorexIQ <dmitrymurashko0@gmail.com>
+- Sunshj ([@sunshj](http://github.com/sunshj))
+
 ## v1.2.7
 
 [compare changes](https://github.com/LorexIQ/nuxt-color-picker/compare/v1.2.6...v1.2.7)
