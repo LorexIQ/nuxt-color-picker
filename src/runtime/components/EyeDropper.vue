@@ -10,7 +10,7 @@ type Emits = {
 const emit = defineEmits<Emits>();
 
 const isDropperOpen = ref(false);
-const eyeDropper = new window.EyeDropper!();
+const eyeDropper = new (window as any).EyeDropper!();
 
 async function openDropper() {
   try {

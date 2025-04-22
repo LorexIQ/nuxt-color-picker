@@ -49,7 +49,7 @@ const emit = defineEmits<Emits>();
 
 const isAlphaBlock = computed(() => props.withAlpha);
 const isInitialColorBlock = computed(() => props.withInitialColor);
-const isEyeDropperBlock = computed(() => props.withEyeDropper && !!window.EyeDropper);
+const isEyeDropperBlock = computed(() => props.withEyeDropper && !!(window as any).EyeDropper);
 const isHexInputBlock = computed(() => props.withHexInput);
 const isRGBInputBlock = computed(() => props.withRgbInput);
 const isColorsHistoryBlock = computed(() => props.withColorsHistory && defaultColorsHistory.length);
