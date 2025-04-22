@@ -38,7 +38,7 @@ function bgGenerator(ctx: CanvasRenderingContext2D, width: number, height: numbe
 }
 function selectGenerator(ctx: CanvasRenderingContext2D, width: number, height: number, { x, y }: ModuleStylesXY) {
   const imgData = ctx.getImageData(Math.min(x + 5, width - 1), Math.min(y + 5, height - 1), 1, 1);
-  const [r, g, b] = imgData.data;
+  const [r, g, b] = imgData.data as unknown as [number, number, number];
   return { r, g, b };
 }
 function sliderXYGenerator(width: number, height: number): ModuleStylesXY {

@@ -9,6 +9,12 @@ export default defineNuxtModule({
 
     _nuxt.options.css.push(resolver.resolve('runtime', 'assets', 'main.css'));
 
+    _nuxt.hook('prepare:types', ({ references }) => {
+      references.push({
+        path: resolver.resolve('./runtime/types/eyedropper.d.ts')
+      });
+    });
+
     addPlugin({
       src: resolver.resolve('./runtime/plugin'),
       mode: 'client'
